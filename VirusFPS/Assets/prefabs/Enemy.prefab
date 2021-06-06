@@ -551,6 +551,8 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
+  revertToPassiveTimer: 5
+  isPassive: 1
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 7
   timeBetweenAttacks: 1

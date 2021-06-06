@@ -127,3 +127,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   range: 20
+  targetTag: Passive

@@ -14,8 +14,10 @@ public class EnemyAI : MonoBehaviour
 
     public LayerMask whatIsGround, whatIsFriend, whatIsEnemy;
     private LayerMask whatIsTarget;
+    public float revertToPassiveTimer = 100f;
 
-    public bool isPassive;
+    public bool isPassive = true;
+    private bool alreadyInfected = false;
 
     //Patroling
     public Vector3 walkPoint;
@@ -39,17 +41,34 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        target = FindTarget();
         SetTarget();
-        //Check for sight and attack range
-        //playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        //playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-        if (target != null)
+        if (!isPassive)
         {
-            if (!playerInSightRange && !playerInAttackRange) Patroling();
-            if (playerInSightRange && !playerInAttackRange) ChasePlayer(); 
-            if (playerInAttackRange && playerInSightRange) AttackPlayer(); 
+            target = FindTarget();
+            
+            //Check for sight and attack range
+            //playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+            //playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+            if (target != null)
+            {
+                if (!playerInSightRange && !playerInAttackRange) Patroling();
+                if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+                if (playerInAttackRange && playerInSightRange) AttackPlayer();
+            }
+
+            if (!alreadyInfected)
+            {
+                alreadyInfected = true;
+                Invoke(nameof(revertToPassive), revertToPassiveTimer);
+            }
         }
+    }
+
+    void revertToPassive()
+    {
+        gameObject.tag = "Passive";
+        isPassive = true;
+        alreadyInfected = false;
     }
 
     private void Patroling()
@@ -140,11 +159,18 @@ public class EnemyAI : MonoBehaviour
         {
             GetComponent<Renderer>().material.color = Color.red;
             targetTag = "Friend";
+            isPassive = false;
         }
         if (gameObject.tag.Equals("Friend"))
         {
             GetComponent<Renderer>().material.color = Color.blue;
             targetTag = "Enemy";
+            isPassive = false;
+        }
+        if (isPassive)
+        {
+            gameObject.tag = "Passive";
+            GetComponent<Renderer>().material.color = Color.grey;
         }
     }
 }
