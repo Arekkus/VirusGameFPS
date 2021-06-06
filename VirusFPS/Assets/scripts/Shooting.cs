@@ -7,6 +7,8 @@ public class Shooting : MonoBehaviour
     public GameObject Bullet;
     public GameObject InfParticle;
 
+    public int ammunition = 15;
+    
     public int particleNumber = 3;
 
     public Camera playerCamera;
@@ -21,19 +23,24 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetMouseButtonDown(0))
         {
             GameObject bulletObject = Instantiate(Bullet);
-            bulletObject.transform.position = playerCamera.transform.position + playerCamera.transform.forward;
+            bulletObject.transform.position = playerCamera.transform.position + playerCamera.transform.forward*2;
             bulletObject.transform.forward = playerCamera.transform.forward;
         }
         if (Input.GetMouseButtonDown(1))
         {
             for (int i = 0; i < particleNumber; i++)
             {
-                GameObject bulletObject = Instantiate(InfParticle);
-                bulletObject.transform.position = playerCamera.transform.position + playerCamera.transform.forward/2;
-                bulletObject.transform.forward = playerCamera.transform.forward;
+                if (ammunition > 0)
+                {
+                    GameObject bulletObject = Instantiate(InfParticle);
+                    bulletObject.transform.position = playerCamera.transform.position + playerCamera.transform.forward/2;
+                    bulletObject.transform.forward = playerCamera.transform.forward;
+                    ammunition--;
+                }
             }
         }
     }
