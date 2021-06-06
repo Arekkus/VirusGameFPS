@@ -9,6 +9,7 @@ TagManager:
   - Friend
   - InfParticle
   - EnemyInf
+  - Passive
   layers:
   - Default
   - TransparentFX
