@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd304ee30278d147b44f1f5cbea8d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTimer: 5
+  spawnTimer: 12
   infParticle: {fileID: 6734648399299047414, guid: 40f54cdaf95af344693665975cee200a, type: 3}
 --- !u!114 &8827774981495450927
 MonoBehaviour:
