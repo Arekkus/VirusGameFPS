@@ -45,13 +45,26 @@ public class EnemyAI : MonoBehaviour
         if (!isPassive)
         {
             target = FindTarget();
-            
-            //Check for sight and attack range
-            //playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-            //playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+
             if (target != null)
             {
-                if (!playerInSightRange && !playerInAttackRange) Patroling();
+                float distToTarget = Vector3.Distance(target.transform.position, transform.position);
+                         
+                         //Check for sight and attack range
+                if (distToTarget <= sightRange)
+                {
+                    playerInSightRange = true;
+                } else {
+                    playerInSightRange = false;
+                }
+                if (distToTarget <= attackRange) 
+                { 
+                    playerInAttackRange = true; 
+                } else { 
+                    playerInAttackRange = false;
+                }
+                
                 if (playerInSightRange && !playerInAttackRange) ChasePlayer();
                 if (playerInAttackRange && playerInSightRange) AttackPlayer();
             }
@@ -62,6 +75,7 @@ public class EnemyAI : MonoBehaviour
                 Invoke(nameof(revertToPassive), revertToPassiveTimer);
             }
         }
+        if (!playerInSightRange && !playerInAttackRange) Patroling();
     }
 
     void revertToPassive()
@@ -73,7 +87,10 @@ public class EnemyAI : MonoBehaviour
 
     private void Patroling()
     {
-        if (!walkPointSet) SearchWalkPoint();
+        if (!walkPointSet)
+        {
+            SearchWalkPoint();
+        }
 
         if (walkPointSet)
             agent.SetDestination(walkPoint);
@@ -91,9 +108,12 @@ public class EnemyAI : MonoBehaviour
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        Debug.DrawRay(walkPoint, -Vector3.up*10);
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        if (Physics.Raycast(walkPoint, -transform.up, 8f, whatIsGround))
+        {
             walkPointSet = true;
+        }
     }
 
     private void ChasePlayer()

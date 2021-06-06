@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: -3273358739216740860}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Enemy
+  m_TagString: Passive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -551,7 +551,7 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
-  revertToPassiveTimer: 5
+  revertToPassiveTimer: 120
   isPassive: 1
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 7
@@ -559,8 +559,8 @@ MonoBehaviour:
   projectile: {fileID: 6566282256805293862, guid: 593140801fc2fa04197d55273870f7c7, type: 3}
   sightRange: 20
   attackRange: 10
-  playerInSightRange: 1
-  playerInAttackRange: 1
+  playerInSightRange: 0
+  playerInAttackRange: 0
 --- !u!195 &-9009540813313525810
 NavMeshAgent:
   m_ObjectHideFlags: 0
