@@ -11,8 +11,9 @@ public class EnemyAI : MonoBehaviour
     public GameObject target;
 
     public String targetTag = "Friend";
+    public bool automaticTargetSearch = true;
 
-    public LayerMask whatIsGround, whatIsFriend, whatIsEnemy;
+    public LayerMask whatIsGround;
     private LayerMask whatIsTarget;
     public float revertToPassiveTimer = 100f;
 
@@ -41,7 +42,10 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        SetTarget();
+        if (automaticTargetSearch)
+        {
+            SetTarget();
+        }
         if (!isPassive)
         {
             target = FindTarget();
