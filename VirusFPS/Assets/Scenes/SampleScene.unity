@@ -1180,6 +1180,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4336246822324290382, guid: 826e975de3d9213418e9fb24b3776637, type: 3}
+      propertyPath: bulletTimer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7925197852491858578, guid: 826e975de3d9213418e9fb24b3776637, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -1230,7 +1234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7925197852792192619, guid: 826e975de3d9213418e9fb24b3776637, type: 3}
       propertyPath: mouseSensitivity
-      value: 300
+      value: 2400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 826e975de3d9213418e9fb24b3776637, type: 3}

@@ -8,7 +8,7 @@ public class Shooting : MonoBehaviour
     public GameObject InfParticle;
 
     private bool alreadyShot = false;
-    public float bulletTimer = 0.5f;
+    public float bulletTimer = 2f;
     
     public int ammunition = 15;
     
@@ -29,12 +29,13 @@ public class Shooting : MonoBehaviour
         
         if (Input.GetMouseButton(0))
         {
-            if (alreadyShot == false)
+            if (!alreadyShot)
             {
                 shootBullet();
+                Invoke(nameof(ResetAttack), bulletTimer);
             }
-            Invoke(nameof(ResetAttack), bulletTimer);
-            alreadyShot = true;
+            
+            
         }
         if (Input.GetMouseButtonDown(1))
         {
@@ -61,5 +62,6 @@ public class Shooting : MonoBehaviour
         GameObject bulletObject = Instantiate(Bullet);
         bulletObject.transform.position = playerCamera.transform.position + playerCamera.transform.forward*2;
         bulletObject.transform.forward = playerCamera.transform.forward;
+        alreadyShot = true;
     }
 }
